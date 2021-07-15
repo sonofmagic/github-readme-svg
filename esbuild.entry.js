@@ -3,18 +3,19 @@ const config = require('./esbuild.config')
 const fs = require('fs')
 // const path = require('path')
 const fsp = fs.promises
-const { isDev } = require('./env')
+const { isDev, isProd } = require('./env')
 ;(async () => {
   // await Promise.all([
   //   configs.map(async (x) => {
   //     return await esbuild.build(x)
   //   })
   // ])
-
-  await fsp.rm('dist', {
-    recursive: true,
-    force: true
-  })
+  if (isProd) {
+    await fsp.rm('dist', {
+      recursive: true,
+      force: true
+    })
+  }
 
   await esbuild.build(config)
 

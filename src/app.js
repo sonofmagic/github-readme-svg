@@ -16,7 +16,9 @@ app.use((err, req, res, next) => {
 })
 
 app.use((req, res) => {
-  res.redirect('https://www.icebreaker.top' + req.url)
+  if (!res.writableEnded) {
+    res.redirect('https://www.icebreaker.top' + req.url)
+  }
 })
 
 export default app

@@ -1,2 +1,2 @@
 #!/bin/sh
-/var/lang/node12/bin/node ./dist
+/var/lang/node12/bin/node ./index.js
