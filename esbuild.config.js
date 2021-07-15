@@ -1,6 +1,8 @@
 // Bundling for node
 const path = require('path')
 
+const { isDev } = require('./env')
+
 /**
  * jsdoc 类似 ts 的写法
  * @typedef {import('esbuild').BuildOptions} BuildOptions
@@ -13,7 +15,7 @@ const config = {
   // tencent node latest runtime
   target: ['node12'],
   outfile: path.resolve(__dirname, 'dist', 'index.js'),
-  sourcemap: true
+  sourcemap: isDev
 }
 
 module.exports = config
