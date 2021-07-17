@@ -1,4 +1,5 @@
 const config = {
+  root: true,
   env: {
     es2021: true
   },
