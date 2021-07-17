@@ -1,3 +1,9 @@
 {
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 10,
+      "includeFile": "api/*.js"
+    }
+  },
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
