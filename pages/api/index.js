@@ -1,14 +1,24 @@
-const app = require('express')()
+const express = require('express')
+const { HttpError } = require('http-errors')
+const app = express()
+const router = express.Router()
+const v1 = require('./routers')
+router.use('/v1', v1)
+app.use('/api', router)
 
-app.get('/api', (req, res) => {
-  res.setHeader('Content-Type', 'text/html')
-  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
-  res.end(`Hello! Go to item: <a href="www.baidu.com">www.baidu.com</a>`)
+app.use((err, req, res, next) => {
+  if (err instanceof HttpError) {
+    res.status(err.status).send(err.message)
+  } else {
+    console.error(err)
+    res.status(500).send('Internal Serverless Error')
+  }
 })
 
-app.get('/api/item/:slug', (req, res) => {
-  const { slug } = req.params
-  res.end(`Item: ${slug}`)
+app.use((req, res) => {
+  if (!res.writableEnded) {
+    res.redirect('https://www.icebreaker.top' + req.url)
+  }
 })
 
 module.exports = app
