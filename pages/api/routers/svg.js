@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const QRCode = require('qrcode-svg')
+
 const createHttpError = require('http-errors')
-const { createSVGWindow } = require('svgdom')
-const { SVG, registerWindow } = require('@svgdotjs/svg.js')
 const { renderIcon } = require('./assets/icon')
+const { renderQRCode } = require('./assets/qrcode')
+const { renderRoad } = require('./assets/road')
 router.get('/qrcode', (req, res, next) => {
   const {
     value,
@@ -17,16 +17,16 @@ router.get('/qrcode', (req, res, next) => {
     ecl = 'Q'
   } = req.query
   if (typeof value === 'string' && value.length) {
-    const qrcodeSvg = new QRCode({
-      content: value,
-      padding: p,
-      width: w || size,
-      height: h || size,
+    const qrcodeSvg = renderQRCode({
+      value,
+      p,
+      size,
+      w,
+      h,
       color,
       background,
-      ecl,
-      join: true
-    }).svg()
+      ecl
+    })
     res.body = qrcodeSvg
     next()
     return
@@ -37,41 +37,7 @@ router.get('/qrcode', (req, res, next) => {
 })
 
 router.get('/road', (req, res, next) => {
-  const window = createSVGWindow()
-  const document = window.document
-  registerWindow(window, document)
-  const canvas = SVG(document.documentElement)
-
-  canvas.viewbox(0, 0, 600, 100)
-  const rect = canvas.rect(600, 100)
-  rect.attr({
-    fill: '#635B58'
-  })
-
-  canvas.line(0, 5, 600, 5).stroke({ width: 4, color: '#ffffff' })
-  canvas.line(0, 95, 600, 95).stroke({ width: 4, color: '#ffffff' })
-  const centerLine = canvas.line(0, 50, 600, 50)
-  centerLine
-    .stroke({
-      width: 4,
-      color: '#ffffff'
-    })
-    .attr({
-      'stroke-dasharray': '50 50',
-      'stroke-dashoffset': 0
-    })
-
-  canvas
-    .element('animate')
-    .attr({
-      attributeName: 'stroke-dashoffset',
-      values: '0;200',
-      dur: '1s',
-      repeatCount: 'indefinite'
-    })
-    .addTo(centerLine)
-  const result = canvas.svg()
-  res.body = result
+  res.body = renderRoad()
   // res.send(result)
   next()
 })

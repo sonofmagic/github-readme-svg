@@ -4,8 +4,9 @@ const {
   renderIconDefinitionToSVGElement
 } = require('@ant-design/icons-svg/lib/helpers')
 
-function renderIcon(icon) {
-  if (svgIcons.hasOwnProperty(icon, (attrs = {}))) {
+function renderIcon (icon, attrs = {}) {
+  // eslint-disable-next-line no-prototype-builtins
+  if (typeof svgIcons === 'object' && svgIcons.hasOwnProperty(icon)) {
     return renderIconDefinitionToSVGElement(svgIcons[icon], {
       extraSVGAttrs: Object.assign(
         {
