@@ -43,3 +43,14 @@ inputs:
               method: ANY
               # function:
               #   type: web
+          customDomains:
+            - domain: svg.icebreaker.top
+              certificateId: ${env:CERTIFICATE_ID}
+              isForcedHttps: true
+              isDefaultMapping: false
+              pathMappingSet:
+                - path: /
+                  environment: release
+              protocols: # 绑定自定义域名的协议类型，默认与服务的前端协议一致。
+                - http # 支持http协议
+                - https # 支持https协议

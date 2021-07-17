@@ -8,6 +8,8 @@
     "dev": "cross-env NODE_ENV=development node ./esbuild.entry.js && node ./dist",
     "build:scf": "cross-env NODE_ENV=production TARGET=scf node ./esbuild.entry.js",
     "build:vc": "cross-env NODE_ENV=production TARGET=vercel node ./esbuild.entry.js",
+    "deploy:scf": "components deploy",
+    "deploy:vc": "vercel --prod",
     "start": "node ./dist"
   },
   "repository": {
