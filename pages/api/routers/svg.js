@@ -23,7 +23,8 @@ router.get('/qrcode', (req, res, next) => {
       height: h || size,
       color,
       background,
-      ecl
+      ecl,
+      join: true
     }).svg()
     res.body = qrcodeSvg
     next()
