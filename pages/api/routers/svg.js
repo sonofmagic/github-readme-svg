@@ -84,8 +84,11 @@ router.get('/icon', (req, res, next) => {
     h, // = '1em',
     fill = 'currentColor'
   } = req.query
+
+  const innerFill = decodeURIComponent(fill)
+
   const attrs = {
-    fill,
+    fill: innerFill,
     width: size,
     height: size
   }
@@ -96,6 +99,7 @@ router.get('/icon', (req, res, next) => {
     attrs.height = h
   }
   const svgStr = renderIcon(value, attrs)
+  // '<?xml version="1.0" standalone="yes"?>' +
   res.body = svgStr
   next()
 })
