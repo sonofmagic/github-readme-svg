@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development node ./esbuild.entry.js && node ./dist",
-    "build": "cross-env NODE_ENV=production node ./esbuild.entry.js",
+    "build:scf": "cross-env NODE_ENV=production TARGET=scf node ./esbuild.entry.js",
+    "build:vc": "cross-env NODE_ENV=production TARGET=vercel node ./esbuild.entry.js",
     "start": "node ./dist"
   },
   "repository": {
@@ -29,11 +30,13 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
     "esbuild": "^0.12.15",
     "eslint": "7.12.1",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "4.2.1"
+    "eslint-plugin-promise": "4.2.1",
+    "exec-sh": "^0.4.0"
   }
 }

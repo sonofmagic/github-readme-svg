@@ -1,9 +1,10 @@
 const esbuild = require('esbuild')
 const config = require('./esbuild.config')
 const fs = require('fs')
-// const path = require('path')
+
 const fsp = fs.promises
-const { isDev, isProd } = require('./env')
+const { isDev, isProd, pathJoin, distPath } = require('./env')
+
 ;(async () => {
   // await Promise.all([
   //   configs.map(async (x) => {
@@ -11,7 +12,7 @@ const { isDev, isProd } = require('./env')
   //   })
   // ])
   if (isProd) {
-    await fsp.rm('dist', {
+    await fsp.rm(distPath, {
       recursive: true,
       force: true
     })
@@ -20,10 +21,14 @@ const { isDev, isProd } = require('./env')
   await esbuild.build(config)
 
   await Promise.all([
-    fsp.copyFile('node_modules/unicode-properties/data.trie', 'dist/data.trie'),
-    fsp.copyFile('node_modules/fontkit/indic.trie', 'dist/indic.trie'),
-    fsp.copyFile('node_modules/fontkit/use.trie', 'dist/use.trie'),
-    fsp.copyFile('scf_bootstrap', 'dist/scf_bootstrap')
+    fsp.copyFile(
+      'node_modules/unicode-properties/data.trie',
+      pathJoin('data.trie')
+    ),
+    fsp.copyFile('node_modules/fontkit/indic.trie', pathJoin('indic.trie')),
+    fsp.copyFile('node_modules/fontkit/use.trie', pathJoin('use.trie'))
+    // custom image deployment : don't need scf_bootstrap
+    // fsp.copyFile('scf_bootstrap', pathJoin('scf_bootstrap'))
   ])
 
   if (isDev) {

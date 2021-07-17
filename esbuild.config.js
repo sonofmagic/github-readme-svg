@@ -1,7 +1,7 @@
 // Bundling for node
 const path = require('path')
 
-const { isDev } = require('./env')
+const { isDev, isVercel, distPath } = require('./env')
 
 /**
  * jsdoc 类似 ts 的写法
@@ -9,12 +9,12 @@ const { isDev } = require('./env')
  * @type {BuildOptions}
  */
 const config = {
-  entryPoints: ['./src/listener.js'],
+  entryPoints: [isVercel ? './src/app.js' : './src/listener.js'],
   bundle: true,
   platform: 'node',
   // tencent node latest runtime
-  target: ['node12'],
-  outfile: path.resolve(__dirname, 'dist', 'index.js'),
+  target: ['node14'],
+  outfile: path.resolve(__dirname, distPath, 'index.js'),
   sourcemap: isDev
 }
 
