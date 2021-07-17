@@ -4,6 +4,7 @@ const QRCode = require('qrcode-svg')
 const createHttpError = require('http-errors')
 const { createSVGWindow } = require('svgdom')
 const { SVG, registerWindow } = require('@svgdotjs/svg.js')
+const { renderIcon } = require('./assets/icon')
 router.get('/qrcode', (req, res, next) => {
   const {
     value,
@@ -72,6 +73,30 @@ router.get('/road', (req, res, next) => {
   const result = canvas.svg()
   res.body = result
   // res.send(result)
+  next()
+})
+
+router.get('/icon', (req, res, next) => {
+  const {
+    value,
+    size = '1em',
+    w, //= '1em',
+    h, // = '1em',
+    fill = 'currentColor'
+  } = req.query
+  const attrs = {
+    fill,
+    width: size,
+    height: size
+  }
+  if (w && typeof w === 'string') {
+    attrs.width = w
+  }
+  if (w && typeof w === 'string') {
+    attrs.height = h
+  }
+  const svgStr = renderIcon(value, attrs)
+  res.body = svgStr
   next()
 })
 
