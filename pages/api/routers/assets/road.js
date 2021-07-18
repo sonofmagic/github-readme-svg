@@ -1,10 +1,11 @@
 const { createSVGWindow } = require('svgdom')
 const { SVG, registerWindow } = require('@svgdotjs/svg.js')
-
-function renderRoad () {
+const { getCar } = require('./car')
+function renderRoad() {
   const window = createSVGWindow()
   const document = window.document
   registerWindow(window, document)
+
   const canvas = SVG(document.documentElement)
 
   canvas.viewbox(0, 0, 600, 100)
@@ -35,6 +36,14 @@ function renderRoad () {
       repeatCount: 'indefinite'
     })
     .addTo(centerLine)
+
+  const carGroup = canvas.group()
+  carGroup.svg(getCar())
+  // carGroup.transform({
+  //   translateX: 50,
+  //   translateY: 50
+  // })
+
   return canvas.svg()
 }
 

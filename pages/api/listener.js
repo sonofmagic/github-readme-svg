@@ -1,4 +1,4 @@
-const app = require('../pages/api/index')
+const app = require('./index')
 
 app.listen(9000, () => {
   console.log(

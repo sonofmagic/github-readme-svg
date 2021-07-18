@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "start:sls": "node ./scripts/listener.js"
+    "start:sls": "node ./pages/api/listener.js"
   },
   "dependencies": {
     "@ant-design/icons-svg": "^4.1.0",
