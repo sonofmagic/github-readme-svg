@@ -5,6 +5,7 @@ const createHttpError = require('http-errors')
 const { renderIcon } = require('./assets/icon')
 const { renderQRCode } = require('./assets/qrcode')
 const { renderRoad } = require('./assets/road')
+const { renderCaptcha } = require('./assets/captcha')
 router.get('/qrcode', (req, res, next) => {
   const {
     value,
@@ -68,6 +69,26 @@ router.get('/icon', (req, res, next) => {
   // '<?xml version="1.0" standalone="yes"?>' +
   res.body = svgStr
   next()
+})
+
+router.get('/captcha', (req, res, next) => {
+  const { value, n, bg, c } = req.query
+
+  if (typeof value === 'string' && value.length) {
+    const params = {
+      text: value,
+      noise: parseInt(n) || 1,
+      color: Boolean(c)
+    }
+    if (bg) {
+      params.background = decodeURIComponent(bg)
+    }
+    const svgStr = renderCaptcha(params)
+    res.body = svgStr
+    next()
+    return
+  }
+  next(new createHttpError[400]('value should not be a empty string'))
 })
 
 module.exports = router
