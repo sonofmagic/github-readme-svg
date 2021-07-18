@@ -72,16 +72,32 @@ router.get('/icon', (req, res, next) => {
 })
 
 router.get('/captcha', (req, res, next) => {
-  const { value, n, bg, c } = req.query
+  const { value, n, bg, c, size, w, h, fz } = req.query
 
   if (typeof value === 'string' && value.length) {
     const params = {
       text: value,
-      noise: parseInt(n) || 1,
+      noise: 1,
       color: Boolean(c)
+    }
+    const noise = parseInt(n)
+    if (!isNaN(noise)) {
+      params.noise = noise
     }
     if (bg) {
       params.background = decodeURIComponent(bg)
+    }
+    if (size) {
+      params.size = parseInt(size) || 4
+    }
+    if (w) {
+      params.width = parseInt(w)
+    }
+    if (h) {
+      params.height = parseInt(h)
+    }
+    if (fz) {
+      params.fontSize = parseInt(fz)
     }
     const svgStr = renderCaptcha(params)
     res.body = svgStr
