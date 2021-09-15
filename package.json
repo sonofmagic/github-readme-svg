@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@ant-design/icons-svg": "^4.1.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@svgdotjs/svg.js": "^3.1.1",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",

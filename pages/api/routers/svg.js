@@ -6,6 +6,7 @@ const { renderIcon } = require('./assets/icon')
 const { renderQRCode } = require('./assets/qrcode')
 const { renderRoad } = require('./assets/road')
 const { renderCaptcha } = require('./assets/captcha')
+const { renderFortawesomeIcon } = require('./assets/fortawesome')
 router.get('/qrcode', (req, res, next) => {
   const {
     value,
@@ -105,6 +106,25 @@ router.get('/captcha', (req, res, next) => {
     return
   }
   next(new createHttpError[400]('value should not be a empty string'))
+})
+
+router.get('/fortawesome', (req, res, next) => {
+  const { prefix, iconName, color } = req.query
+
+  if (prefix && iconName) {
+    const svgColor = decodeURIComponent(color)
+    const vIcon = renderFortawesomeIcon({
+      prefix,
+      iconName
+    }, {
+      styles: { color: svgColor }
+    })
+
+    res.body = vIcon.html[0]
+    next()
+    return
+  }
+  next(new createHttpError[400]('prefix and iconName should not be empty'))
 })
 
 module.exports = router
