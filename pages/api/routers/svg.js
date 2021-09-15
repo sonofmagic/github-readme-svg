@@ -7,6 +7,7 @@ const { renderQRCode } = require('./assets/qrcode')
 const { renderRoad } = require('./assets/road')
 const { renderCaptcha } = require('./assets/captcha')
 const { renderFortawesomeIcon } = require('./assets/fortawesome')
+const { renderMiniprogram } = require('./assets/mp')
 router.get('/qrcode', (req, res, next) => {
   const {
     value,
@@ -125,6 +126,11 @@ router.get('/fortawesome', (req, res, next) => {
     return
   }
   next(new createHttpError[400]('prefix and iconName should not be empty'))
+})
+
+router.get('/icon/miniprogram', (req, res, next) => {
+  res.body = renderMiniprogram()
+  next()
 })
 
 module.exports = router
