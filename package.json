@@ -10,7 +10,7 @@
     "start:sls": "node ./pages/api/listener.js"
   },
   "dependencies": {
-    "@ant-design/icons-svg": "^4.1.0",
+    "@ant-design/icons-svg": "^4.2.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
@@ -18,30 +18,30 @@
     "@svgdotjs/svg.js": "^3.1.1",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
-    "http-errors": "^1.8.0",
+    "http-errors": "^1.8.1",
     "lodash": "^4.17.21",
-    "next": "11.0.1",
+    "next": "12.0.4",
     "qrcode-svg": "^1.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.0",
     "rss": "^1.2.2",
     "svg-captcha": "^1.4.0",
-    "svgdom": "^0.1.8"
+    "svgdom": "^0.1.10"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
-    "@vercel/node": "^1.11.1",
-    "autoprefixer": "^10.3.1",
-    "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1",
+    "@vercel/node": "^1.12.1",
+    "autoprefixer": "^10.4.0",
+    "eslint": "8.3.0",
+    "eslint-config-next": "12.0.4",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.1.0",
-    "postcss": "^8.3.6",
-    "sass": "^1.36.0",
-    "tailwindcss": "^2.2.7"
+    "eslint-plugin-promise": "5.1.1",
+    "postcss": "^8.3.11",
+    "sass": "^1.43.4",
+    "tailwindcss": "^2.2.19"
   }
 }
