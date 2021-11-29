@@ -32,16 +32,19 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
+    "@types/node": "^16.11.10",
+    "@types/react": "^17.0.37",
     "@vercel/node": "^1.12.1",
     "autoprefixer": "^10.4.0",
-    "eslint": "8.3.0",
+    "eslint": "^7",
     "eslint-config-next": "12.0.4",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.1.1",
-    "postcss": "^8.3.11",
-    "sass": "^1.43.4",
-    "tailwindcss": "^2.2.19"
+    "postcss": "^8.4.4",
+    "sass": "^1.43.5",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.5.2"
   }
 }
