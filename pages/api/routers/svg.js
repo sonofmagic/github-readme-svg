@@ -142,7 +142,8 @@ router.get('/icon/miniprogram', (req, res, next) => {
 
 router.get('/mathjax', async (req, res, next) => {
   const { tex } = req.query
-  res.body = await renderMathjax(tex)
+  const decodeTex = decodeURIComponent(tex)
+  res.body = await renderMathjax(decodeTex)
   next()
 })
 
