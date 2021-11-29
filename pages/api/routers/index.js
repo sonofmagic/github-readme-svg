@@ -11,7 +11,7 @@ router.use((req, res, next) => {
 
   if (res.statusCode === 200 && res.body) {
     res.setHeader('Content-Type', 'image/svg+xml')
-    res.setHeader('Cache-Control', `public, max-age=${ONE_HOUR}`)
+    res.setHeader('Cache-Control', `public, max-age=${ONE_DAY}`)
     res.send(res.body)
   }
 })
