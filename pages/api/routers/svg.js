@@ -2,12 +2,16 @@ const express = require('express')
 const router = express.Router()
 
 const createHttpError = require('http-errors')
-const { renderIcon } = require('./assets/icon')
-const { renderQRCode } = require('./assets/qrcode')
-const { renderRoad } = require('./assets/road')
-const { renderCaptcha } = require('./assets/captcha')
-const { renderFortawesomeIcon } = require('./assets/fortawesome')
-const { renderMiniprogram } = require('./assets/mp')
+const {
+  renderIcon,
+  renderQRCode,
+  renderRoad,
+  renderCaptcha,
+  renderFortawesomeIcon,
+  renderMiniprogram,
+  renderMathjax,
+} = require('./assets')
+
 router.get('/qrcode', (req, res, next) => {
   const {
     value,
@@ -17,7 +21,7 @@ router.get('/qrcode', (req, res, next) => {
     h,
     color = '#000000',
     background = '#ffffff',
-    ecl = 'Q'
+    ecl = 'Q',
   } = req.query
   if (typeof value === 'string' && value.length) {
     const qrcodeSvg = renderQRCode({
@@ -28,7 +32,7 @@ router.get('/qrcode', (req, res, next) => {
       h,
       color,
       background,
-      ecl
+      ecl,
     })
     res.body = qrcodeSvg
     next()
@@ -51,7 +55,7 @@ router.get('/icon', (req, res, next) => {
     size = '1em',
     w, //= '1em',
     h, // = '1em',
-    fill = 'currentColor'
+    fill = 'currentColor',
   } = req.query
 
   const innerFill = decodeURIComponent(fill)
@@ -59,7 +63,7 @@ router.get('/icon', (req, res, next) => {
   const attrs = {
     fill: innerFill,
     width: size,
-    height: size
+    height: size,
   }
   if (w && typeof w === 'string') {
     attrs.width = w
@@ -80,7 +84,7 @@ router.get('/captcha', (req, res, next) => {
     const params = {
       text: value,
       noise: 1,
-      color: Boolean(c)
+      color: Boolean(c),
     }
     const noise = parseInt(n)
     if (!isNaN(noise)) {
@@ -114,12 +118,15 @@ router.get('/fortawesome', (req, res, next) => {
 
   if (prefix && iconName) {
     const svgColor = decodeURIComponent(color)
-    const vIcon = renderFortawesomeIcon({
-      prefix,
-      iconName
-    }, {
-      styles: { color: svgColor }
-    })
+    const vIcon = renderFortawesomeIcon(
+      {
+        prefix,
+        iconName,
+      },
+      {
+        styles: { color: svgColor },
+      }
+    )
 
     res.body = vIcon.html[0]
     next()
@@ -130,6 +137,13 @@ router.get('/fortawesome', (req, res, next) => {
 
 router.get('/icon/miniprogram', (req, res, next) => {
   res.body = renderMiniprogram()
+  next()
+})
+
+router.get('/mathjax', async (req, res, next) => {
+  const { tex } = req.query
+  const decodeTex = decodeURIComponent(tex)
+  res.body = await renderMathjax(decodeTex)
   next()
 })
 
