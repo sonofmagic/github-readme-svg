@@ -9,7 +9,7 @@ const {
   renderCaptcha,
   renderFortawesomeIcon,
   renderMiniprogram,
-  renderMathjax,
+  // renderMathjax,
 } = require('./assets')
 
 router.get('/qrcode', (req, res, next) => {
@@ -140,11 +140,11 @@ router.get('/icon/miniprogram', (req, res, next) => {
   next()
 })
 
-router.get('/mathjax', async (req, res, next) => {
-  const { tex } = req.query
-  const decodeTex = decodeURIComponent(tex)
-  res.body = await renderMathjax(decodeTex)
-  next()
-})
+// router.get('/mathjax', async (req, res, next) => {
+//   const { tex } = req.query
+//   const decodeTex = decodeURIComponent(tex)
+//   res.body = await renderMathjax(decodeTex)
+//   next()
+// })
 
 module.exports = router
