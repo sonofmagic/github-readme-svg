@@ -22,6 +22,8 @@ router.get('/qrcode', (req, res, next) => {
     color = '#000000',
     background = '#ffffff',
     ecl = 'Q',
+    type,
+    ...args
   } = req.query
   if (typeof value === 'string' && value.length) {
     const qrcodeSvg = renderQRCode({
@@ -33,6 +35,8 @@ router.get('/qrcode', (req, res, next) => {
       color,
       background,
       ecl,
+      type,
+      ...args,
     })
     res.body = qrcodeSvg
     next()
