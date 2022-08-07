@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@icebreakers/qrcode": "^0.0.2",
     "@svgdotjs/svg.js": "^3.1.2",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "gray-matter": "^4.0.3",
     "http-errors": "^2.0.0",

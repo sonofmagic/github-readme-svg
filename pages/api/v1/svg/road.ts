@@ -1,12 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
-export default function handler(
-  request: NextApiRequest,
-  response: NextApiResponse
-) {
-  response.status(200).json({
-    body: request.body,
-    query: request.query,
-    cookies: request.cookies,
-  })
+import { svgCache } from '@/api-utils/svg-cache'
+import { renderRoad } from '@/api-utils/assets/road'
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  svgCache(req, res, renderRoad())
 }
